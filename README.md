@@ -10,7 +10,7 @@ git submodule add https://github.com/RomaTk/docker-wraps-git-module.git modules/
 ## Wraps:
 After that you will have the following wraps available:
 - `git-get-latest-version`
-- `git-download`
+- `git-download-without-configs`
 - `git-download-with-configs`
 - `git-install`
 
