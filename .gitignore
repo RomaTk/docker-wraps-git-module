@@ -1,0 +1,7 @@
+/dockers/git/get-latest-version/configs
+/dockers/git/download/with-configs/configs
+/dockers/git/install/configs
+/dockers/git/install/saved-versions
+
+/dockers/git/git
+/env-scripts/git/git

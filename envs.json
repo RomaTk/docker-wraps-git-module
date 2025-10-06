@@ -1,0 +1,110 @@
+{
+    "wraps": {
+        "git-get-latest-version": {
+            "basedOn": [
+                {
+                    "name": "ubuntu-wget-install",
+                    "tag": "latest",
+                    "precreate": true
+                },
+                {
+                    "name": "ubuntu-jq-install",
+                    "tag": "latest",
+                    "precreate": true
+                }
+            ],
+            "dockerfile": "./dockers/git/get-latest-version/Dockerfile",
+            "build": {
+                "context": "./dockers/git/get-latest-version"
+            },
+            "run": {
+                "volumes": [
+                    {
+                        "destination": "/working-env/git/configs",
+                        "source": "./dockers/git/get-latest-version/configs"
+                    }
+                ],
+                "entrypoint": {
+                    "tool": "bash",
+                    "args": [
+                        "-c"
+                    ],
+                    "commands": [
+                        "/working-env/git/main.sh"
+                    ]
+                }
+            },
+            "clean": [
+                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"get-latest-version\""
+            ]
+        },
+        "git-download-without-configs": {
+            "basedOn": {
+                "name": "ubuntu-wget-install",
+                "tag": "latest",
+                "precreate": true
+            },
+            "dockerfile": "./dockers/git/download/without-configs/Dockerfile",
+            "build": {
+                "context": "./dockers/git/download/without-configs"
+            },
+            "run": {
+                "volumes": [
+                    {
+                        "destination": "/working-env/git/download/saved",
+                        "source": "./dockers/git/install/saved-versions"
+                    }
+                ],
+                "entrypoint": {
+                    "tool": "bash",
+                    "args": [
+                        "-c"
+                    ],
+                    "commands": [
+                        "(source /working-env/git/download/main.sh && main)"
+                    ]
+                }
+            }
+        },
+        "git-download-with-configs": {
+            "basedOn": {
+                "name": "git-download-without-configs",
+                "tag": "latest",
+                "precreate": true
+            },
+            "dockerfile": "./dockers/git/download/with-configs/Dockerfile",
+            "build": {
+                "context": "./dockers/git/download/with-configs"
+            },
+            "clean": [
+                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"download\""
+            ]
+        },
+        "git-install": {
+            "basedOn": {
+                "name": "ubuntu-with-latest-packages",
+                "tag": "latest",
+                "precreate": true
+            },
+            "dockerfile": "./dockers/git/install/Dockerfile",
+            "build": {
+                "context": "./dockers/git/install",
+                "options": [
+                    "--build-arg VERSION=\"$(source ./env-scripts/not-by-wrap-name/install-some-util/read-version.sh && main \"./dockers/git\")\""
+                ],
+                "run": {
+                    "before": [
+                        "source ./env-scripts/git/install/prepare-before-build.sh && main \"\" \"linux\" \"./dockers/git\""
+                    ],
+                    "after": [
+                        "source \"./env-scripts/not-by-wrap-name/backups/make.sh\" && main \"$(./envs.sh get name image git-install)\""
+                    ]
+                }
+            },
+            "clean": [
+                "source \"./env-scripts/not-by-wrap-name/backups/clean.sh\" && main \"$(./envs.sh get name image git-install)\"",
+                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"install\""
+            ]
+        }
+    }
+}
