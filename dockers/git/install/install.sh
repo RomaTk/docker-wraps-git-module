@@ -35,7 +35,7 @@ cd "$dest_folder"
 
 make configure
 [ $? -ne 0 ] && exit 1
-./configure --prefix="/usr/local"
+(eval "./configure ${configure_options}")
 [ $? -ne 0 ] && exit 1
 make all
 [ $? -ne 0 ] && exit 1
