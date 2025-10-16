@@ -35,7 +35,13 @@ cd "$dest_folder"
 
 make configure
 [ $? -ne 0 ] && exit 1
-(eval "./configure ${configure_options}")
+if [[ -n "${configure_options}" ]]; then
+    # Split configure_options into an array
+    read -r -a configure_options_array <<< "${configure_options}"
+    ./configure "${configure_options_array[@]}"
+else
+    ./configure
+fi
 [ $? -ne 0 ] && exit 1
 make all
 [ $? -ne 0 ] && exit 1
