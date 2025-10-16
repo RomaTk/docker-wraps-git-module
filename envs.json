@@ -90,7 +90,8 @@
             "build": {
                 "context": "./dockers/git/install",
                 "options": [
-                    "--build-arg VERSION=\"$(source ./env-scripts/not-by-wrap-name/install-some-util/read-version.sh && main \"./dockers/git\")\""
+                    "--build-arg VERSION=\"$(source ./env-scripts/not-by-wrap-name/install-some-util/read-version.sh && main \"./dockers/git\")\"",
+                    "--build-arg CONFIGURE_OPTIONS=\"--prefix=/usr/local\""
                 ],
                 "run": {
                     "before": [
