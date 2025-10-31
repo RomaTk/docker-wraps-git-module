@@ -30,7 +30,7 @@
                         "-c"
                     ],
                     "commands": [
-                        "/working-env/git/main.sh"
+                        "(source /working-env/git/main.sh && main)"
                     ]
                 }
             },
