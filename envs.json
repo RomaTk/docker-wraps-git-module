@@ -30,12 +30,12 @@
                         "-c"
                     ],
                     "commands": [
-                        "/working-env/git/main.sh"
+                        "(source /working-env/git/main.sh && main)"
                     ]
                 }
             },
             "clean": [
-                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"get-latest-version\""
+                "(source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"get-latest-version\")"
             ]
         },
         "git-download-without-configs": {
@@ -77,7 +77,7 @@
                 "context": "./dockers/git/download/with-configs"
             },
             "clean": [
-                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"download\""
+                "(source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"download\")"
             ]
         },
         "git-install": {
@@ -95,16 +95,16 @@
                 ],
                 "run": {
                     "before": [
-                        "source ./env-scripts/git/install/prepare-before-build.sh && main \"\" \"linux\" \"./dockers/git\""
+                        "(source ./env-scripts/git/install/prepare-before-build.sh && main \"\" \"linux\" \"./dockers/git\")"
                     ],
                     "after": [
-                        "source \"./env-scripts/not-by-wrap-name/backups/make.sh\" && main \"$(./envs.sh get name image git-install)\""
+                        "(source \"./env-scripts/not-by-wrap-name/backups/make.sh\" && main \"$(./envs.sh get name image git-install)\")"
                     ]
                 }
             },
             "clean": [
-                "source \"./env-scripts/not-by-wrap-name/backups/clean.sh\" && main \"$(./envs.sh get name image git-install)\"",
-                "source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"install\""
+                "(source \"./env-scripts/not-by-wrap-name/backups/clean.sh\" && main \"$(./envs.sh get name image git-install)\")",
+                "(source ./env-scripts/not-by-wrap-name/install-some-util/clean.sh && main \"./dockers/git\" \"install\")"
             ]
         }
     }
