@@ -9,10 +9,11 @@ git submodule add https://github.com/RomaTk/docker-wraps-git-module.git modules/
 
 ## Wraps:
 After that you will have the following wraps available:
-- `git-get-latest-version`
-- `git-download-without-configs`
-- `git-download-with-configs`
-- `git-install`
+- [File - envs.json](./envs.json)
+    - `git-get-latest-version`
+    - `git-download-without-configs`
+    - `git-download-with-configs`
+    - `git-install`
 
 You can specify which version of git you want to use by modifying `build.run.before` in `git-install` wrap. Within:
 ```bash
