@@ -17,6 +17,9 @@ function main() {
     ln -sf "../$current_dir/env-scripts/git" "../../env-scripts/git"
     [ $? -ne 0 ] && exit 1
 
+    ln -sf "../$current_dir/tests/git" "../../tests/git"
+    [ $? -ne 0 ] && exit 1
+
     ln -sf "../$current_dir/envs.json" "../../env-jsons/git.json"
     [ $? -ne 0 ] && exit 1
 

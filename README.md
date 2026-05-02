@@ -14,6 +14,7 @@ After that you will have the following wraps available:
     - `git-download-without-configs`
     - `git-download-with-configs`
     - `git-install`
+    - `git-install-test` - only for testing porposes
 
 You can specify which version of git you want to use by modifying `build.run.before` in `git-install` wrap. Within:
 ```bash

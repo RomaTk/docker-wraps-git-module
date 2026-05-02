@@ -106,6 +106,38 @@
             "clean": [
                 "(source \"./env-scripts/not-by-wrap-name/backups/clean.sh\" && main \"$(./envs.sh get name image git-install)\")"
             ]
+        },
+        "git-install-test": {
+            "basedOn": [
+                {
+                    "name": "git-install",
+                    "tag": "latest",
+                    "precreate": true,
+                    "asAbstract": true
+                }
+            ],
+            "build": {
+                "run": {
+                    "after": [
+                        {
+                            "action": "remove",
+                            "value": "(source \"./env-scripts/not-by-wrap-name/backups/make.sh\" && main \"$(./envs.sh get name image git-install)\")",
+                            "basedOnScope": "git-install"
+                        }
+                    ]
+                }
+            },
+            "run": {
+                "entrypoint": {
+                    "tool": "bash",
+                    "args": [
+                        "-c"
+                    ],
+                    "commands": [
+                        "(git --version)"
+                    ]
+                }
+            }
         }
     }
 }
